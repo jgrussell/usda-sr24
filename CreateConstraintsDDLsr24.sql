@@ -2,7 +2,7 @@
 * This is mostlyl a blatant cut from the PostgreSQL database dump
 * in the https://github.com/Adyg/usdanl-sr28-postgresql repository.
 *
-* A few missing constraints have been added to facilitate
+* A few missing constraints have been added and corrected to facilitate
 * automatic ER diagram generation in code, anlytics tools, etc.
 *
 * These new constraints (all FK's currently) are at bottom of this script.
@@ -112,23 +112,6 @@ ALTER TABLE ONLY weight
 ALTER TABLE ONLY datsrcln
     ADD CONSTRAINT datsrcln_datasrc_id_fkey FOREIGN KEY (datasrc_id) REFERENCES data_src(datasrc_id);
 
-
---
--- Name: datsrcln_ndb_no_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY datsrcln
-    ADD CONSTRAINT datsrcln_ndb_no_fkey FOREIGN KEY (ndb_no) REFERENCES food_des(ndb_no);
-
-
---
--- Name: datsrcln_nutr_no_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY datsrcln
-    ADD CONSTRAINT datsrcln_nutr_no_fkey FOREIGN KEY (nutr_no) REFERENCES nutr_def(nutr_no);
-
-
 --
 -- Name: food_des_fdgrp_cd_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
@@ -191,3 +174,5 @@ ALTER TABLE ONLY footnote
 ALTER TABLE ONLY footnote
     ADD CONSTRAINT footnote_nutr_no_fkey FOREIGN KEY (nutr_no) REFERENCES nutr_def(nutr_no);
 
+ALTER TABLE ONLY datsrcln
+     ADD CONSTRAINT datsrcln_nut_data_fkey FOREIGN KEY (ndb_no, nutr_no) REFERENCES nut_data(ndb_no, nutr_no);

@@ -1,0 +1,6 @@
+# DBeaver project configuration files
+/.project
+/.dbeaver/
+#
+# Output files
+/sr24/

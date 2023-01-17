@@ -54,8 +54,8 @@ for t in $table_list; do
 	echo "CREATE INDEX ${t}_pk ON ${t}${pk_cols};" >> $SQL_OUT
 	echo "pragma writable_schema=1;" >> $SQL_OUT
 	echo "UPDATE sqlite_master SET name='sqlite_autoindex_${t}_1',sql=null WHERE name='${t}_pk';" >> $SQL_OUT
-	echo "UPDATE sqlite_master SET sql= SUBSTRING(sql, 1, LENGTH (sql) - 1) || ', primary key${pk_cols}'" >> $SQL_OUT
-	echo "WHERE name='${t}';" >> $SQL_OUT
+	echo -n "UPDATE sqlite_master SET sql= SUBSTRING(sql, 1, LENGTH (sql) - 1) || ', primary key${pk_cols}" >> $SQL_OUT
+	echo ")' WHERE name='${t}';" >> $SQL_OUT
 	echo "COMMIT;" >> $SQL_OUT
 done
 

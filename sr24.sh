@@ -37,7 +37,7 @@ sqlite3 sr24/sr24.db < CreateTablesDDLsr24.sql
 sqlite3 -batch sr24/sr24.db <<EOF
 .mode tabs
 .import sr24/DATA_SRC.txt data_src
-.import sr24/DATSRCLN.txt datsrclc
+.import sr24/DATSRCLN.txt datsrcln
 .import sr24/DERIV_CD.txt deriv_cd
 .import sr24/FD_GROUP.txt fd_group
 .import sr24/FOOD_DES.txt food_des
@@ -52,5 +52,5 @@ EOF
 # I quit working on this before I could figure out how to enable PK's and FK's
 # after loading data, diminishing returns and all. (I don't really use SQLite.)
 #
-# ./SQLiteHack.sh
-# sqlite3 sr24/sr24.db < SQLiteHack.sql
+./SQLiteHack.sh
+sqlite3 sr24/sr24.db < SQLiteHack.sql

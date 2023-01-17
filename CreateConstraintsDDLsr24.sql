@@ -1,10 +1,12 @@
 /*
 * This is mostlyl a blatant cut from the PostgreSQL database dump
 * in the https://github.com/Adyg/usdanl-sr28-postgresql repository.
-* 
-* A few missing FK constraints have been added to facilitate 
+*
+* A few missing constraints have been added to facilitate
 * automatic ER diagram generation in code, anlytics tools, etc.
-* (Find these new FK's at bottom of this script.)
+*
+* These new constraints (all FK's currently) are at bottom of this script.
+*
 */
 
 --
@@ -175,7 +177,7 @@ ALTER TABLE ONLY weight
     ADD CONSTRAINT weight_ndb_no_fkey FOREIGN KEY (ndb_no) REFERENCES food_des(ndb_no);
 
 --
--- New FK's follow
+-- New constraints follow
 --
 ALTER TABLE ONLY nut_data
     ADD CONSTRAINT nut_data_src_cd_fkey FOREIGN KEY (src_cd) REFERENCES src_cd(src_cd);
@@ -184,8 +186,8 @@ ALTER TABLE ONLY nut_data
     ADD CONSTRAINT nut_data_deriv_cd_fkey FOREIGN KEY (deriv_cd) REFERENCES deriv_cd(deriv_cd);
 
 ALTER TABLE ONLY footnote
-    ADD CONSTRAINT footnote_deriv_cd_fkey FOREIGN KEY (ndb_no) REFERENCES food_des(ndb_no);  
-   
+    ADD CONSTRAINT footnote_deriv_cd_fkey FOREIGN KEY (ndb_no) REFERENCES food_des(ndb_no);
+
 ALTER TABLE ONLY footnote
-    ADD CONSTRAINT footnote_nutr_no_fkey FOREIGN KEY (nutr_no) REFERENCES nutr_def(nutr_no);      
+    ADD CONSTRAINT footnote_nutr_no_fkey FOREIGN KEY (nutr_no) REFERENCES nutr_def(nutr_no);
 

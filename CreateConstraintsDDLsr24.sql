@@ -175,4 +175,4 @@ ALTER TABLE ONLY footnote
     ADD CONSTRAINT footnote_nutr_no_fkey FOREIGN KEY (nutr_no) REFERENCES nutr_def(nutr_no);
 
 ALTER TABLE ONLY datsrcln
-     ADD CONSTRAINT datsrcln_nut_data_fkey FOREIGN KEY (ndb_no, nutr_no) REFERENCES nut_data(ndb_no, nutr_no);
+    ADD CONSTRAINT datsrcln_nut_data_fkey FOREIGN KEY (ndb_no, nutr_no) REFERENCES nut_data(ndb_no, nutr_no);

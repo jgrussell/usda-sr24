@@ -24,7 +24,7 @@ BEGIN;
 CREATE INDEX datsrcln_pk ON datsrcln(ndb_no, nutr_no, datasrc_id);
 pragma writable_schema=1;
 UPDATE sqlite_master SET name='sqlite_autoindex_datsrcln_1',sql=null WHERE name='datsrcln_pk';
-UPDATE sqlite_master SET sql= SUBSTRING(sql, 1, LENGTH (sql) - 1) || ', primary key(ndb_no, nutr_no, datasrc_id))' WHERE name='datsrcln';
+UPDATE sqlite_master SET sql= SUBSTRING(sql, 1, LENGTH (sql) - 1) || ', primary key(ndb_no, nutr_no, datasrc_id), foreign key(datasrc_id) REFERENCES data_src(datasrc_id), foreign key(ndb_no, nutr_no) REFERENCES nut_data(ndb_no, nutr_no))' WHERE name='datsrcln';
 COMMIT;
 #
 BEGIN;
@@ -45,7 +45,7 @@ BEGIN;
 CREATE INDEX food_des_pk ON food_des(ndb_no);
 pragma writable_schema=1;
 UPDATE sqlite_master SET name='sqlite_autoindex_food_des_1',sql=null WHERE name='food_des_pk';
-UPDATE sqlite_master SET sql= SUBSTRING(sql, 1, LENGTH (sql) - 1) || ', primary key(ndb_no))' WHERE name='food_des';
+UPDATE sqlite_master SET sql= SUBSTRING(sql, 1, LENGTH (sql) - 1) || ', primary key(ndb_no), foreign key(fdgrp_cd) REFERENCES fd_group(fdgrp_cd))' WHERE name='food_des';
 COMMIT;
 #
 BEGIN;
@@ -59,14 +59,14 @@ BEGIN;
 CREATE INDEX langual_pk ON langual(ndb_no, factor_code);
 pragma writable_schema=1;
 UPDATE sqlite_master SET name='sqlite_autoindex_langual_1',sql=null WHERE name='langual_pk';
-UPDATE sqlite_master SET sql= SUBSTRING(sql, 1, LENGTH (sql) - 1) || ', primary key(ndb_no, factor_code))' WHERE name='langual';
+UPDATE sqlite_master SET sql= SUBSTRING(sql, 1, LENGTH (sql) - 1) || ', primary key(ndb_no, factor_code), foreign key(factor_code) REFERENCES langdesc(factor_code), foreign key(ndb_no) REFERENCES food_des(ndb_no))' WHERE name='langual';
 COMMIT;
 #
 BEGIN;
 CREATE INDEX nut_data_pk ON nut_data(ndb_no, nutr_no);
 pragma writable_schema=1;
 UPDATE sqlite_master SET name='sqlite_autoindex_nut_data_1',sql=null WHERE name='nut_data_pk';
-UPDATE sqlite_master SET sql= SUBSTRING(sql, 1, LENGTH (sql) - 1) || ', primary key(ndb_no, nutr_no))' WHERE name='nut_data';
+UPDATE sqlite_master SET sql= SUBSTRING(sql, 1, LENGTH (sql) - 1) || ', primary key(ndb_no, nutr_no), foreign key(ndb_no) REFERENCES food_des(ndb_no), foreign key(nutr_no) REFERENCES nutr_def(nutr_no), foreign key(src_cd) REFERENCES src_cd(src_cd), foreign key(deriv_cd) REFERENCES deriv_cd(deriv_cd))' WHERE name='nut_data';
 COMMIT;
 #
 BEGIN;
@@ -87,5 +87,17 @@ BEGIN;
 CREATE INDEX weight_pk ON weight(ndb_no, seq);
 pragma writable_schema=1;
 UPDATE sqlite_master SET name='sqlite_autoindex_weight_1',sql=null WHERE name='weight_pk';
-UPDATE sqlite_master SET sql= SUBSTRING(sql, 1, LENGTH (sql) - 1) || ', primary key(ndb_no, seq))' WHERE name='weight';
+UPDATE sqlite_master SET sql= SUBSTRING(sql, 1, LENGTH (sql) - 1) || ', primary key(ndb_no, seq), foreign key(ndb_no) REFERENCES food_des(ndb_no))' WHERE name='weight';
+COMMIT;
+#
+BEGIN;
+pragma writable_schema=1;
+UPDATE sqlite_master SET sql='CREATE TABLE footnote (
+    ndb_no character varying(5) NOT NULL,
+    footnt_no character varying(4) NOT NULL,
+    footnt_typ character varying(1),
+    nutr_no character varying(3),
+    footnt_txt character varying(200) NOT NULL,
+    foreign key(ndb_no) REFERENCES food_des(ndb_no), foreign key(nutr_no) REFERENCES nutr_def(nutr_no)
+);'  WHERE name='footnote';
 COMMIT;

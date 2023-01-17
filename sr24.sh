@@ -34,6 +34,9 @@ sqlite3 sr24/sr24.db < CreateTablesDDLsr24.sql
 # Import resulting data files into new SQLite database file
 # Yes, I know this could have been written with fewer lines of code; but,
 # I will likely never run or modify this again.
+#
+# This import throws the following warning which I am ignoring for now:
+#    sr24/DATA_SRC.txt:147: expected 9 columns but found 10 - extras ignored
 sqlite3 -batch sr24/sr24.db <<EOF
 .mode tabs
 .import sr24/DATA_SRC.txt data_src
@@ -49,8 +52,7 @@ sqlite3 -batch sr24/sr24.db <<EOF
 .import sr24/SRC_CD.txt src_cd
 .import sr24/WEIGHT.txt weight
 EOF
-# I quit working on this before I could figure out how to enable PK's and FK's
-# after loading data, diminishing returns and all. (I don't really use SQLite.)
-#
+# Hacky way of adding FK's to SQLite after loading data into tables.
+# This scrip is very fragile.
 ./SQLiteHack.sh
 sqlite3 sr24/sr24.db < SQLiteHack.sql

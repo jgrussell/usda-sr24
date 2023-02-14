@@ -17,10 +17,14 @@ If you are just looking for the cleaned up output files and/or the SQLite databa
     - [CockroachDB](https://cockroachlabs.cloud/)
     
     - [YugabyteDB](https://cloud.yugabyte.com)
+    
+    - [Oracle APEX]([Platform - Oracle APEX](https://apex.oracle.com/en/platform/)) and/or other [free offerings from Oracle]([Cloud Free Tier | Oracle](https://www.oracle.com/cloud/free/)) 
   
   - [Budibase](https://account.budibase.app/auth/login)
   
   - GitHub Releases
+  
+  - Automated testing tools, frameworks, etc.
 
 - If I build the nutrition focused meal/diet planning/tracking/optimization application that has been bouncing around in my head for years, this will be used for my initial QA since this data is the basis of the application that I am currently using, [CRON-o-Meter](https://sourceforge.net/projects/cronometer/).
 
@@ -53,7 +57,7 @@ If you are just looking for the cleaned up output files and/or the SQLite databa
 
 # To Do
 
-- [ ] Basic data QA
+- [x] Basic data QA: See [tests/README.md](tests/README.md) for details.
 
 - [ ] Test DDL on additional databases
   
@@ -67,4 +71,18 @@ If you are just looking for the cleaned up output files and/or the SQLite databa
 
 - [ ] Consider refactoring `footnote` table to normalize it?
 
-# Note
+- [ ] GitHub Release containing output files, database, etc.
+
+- [ ] Recreate something very similar for SR28 and this [cronometer fork]([GitHub - myint/cronometer: Nutrition tracker; fork of the old Java-based Cronometer with better macOS support and newer USDA database](https://github.com/myint/cronometer))
+
+# Note / Contributing
+
+- Please let me know if you find any errors in this process, my interpretation of the data, etc. via any of the following channels:
+  
+  - File an [Issue](https://github.com/jgrussell/usda-sr24/issues)
+  
+  - Log a [Pull request (PR)](https://github.com/jgrussell/usda-sr24/pulls)
+  
+  - Start a [Discussion](https://github.com/jgrussell/usda-sr24/discussions)
+
+- I am not likely to be interested refactoring this repository for performance, style, etc.

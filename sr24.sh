@@ -55,4 +55,13 @@ EOF
 # Hacky way of adding FK's to SQLite after loading data into tables.
 # This scrip is very fragile.
 ./SQLiteHack.sh
-sqlite3 sr24/sr24.db < SQLiteHack.sql
+sqlite3 -batch sr24/sr24.db < SQLiteHack.sql
+# Run tests to verify data in database
+sqlite3 -batch sr24/sr24.db < tests/CreateViewsDDL.sql
+testsSQLite.sh
+
+
+
+
+
+
